@@ -1,0 +1,41 @@
+---
+- name: RedHat | Uninstall old (unofficial) versions
+  ansible.builtin.package:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-selinux
+      - docker-engine-selinux
+      - docker-engine
+      - podman
+      - runc
+    state: absent
+
+- name: RedHat | Prepare for clean install
+  when: docker_clean_install | bool
+  block:
+    - name: RedHat | Clean | Uninstall Docker Engine
+      ansible.builtin.package:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+          - docker-ce-rootless-extras
+        state: absent
+
+    - name: RedHat | Clean | Remove Docker directories [1/2]
+      ansible.builtin.file:
+        path: /var/lib/docker
+        state: absent
+
+    - name: RedHat | Clean | Remove Docker directories [2/2]
+      ansible.builtin.file:
+        path: /var/lib/containerd
+        state: absent

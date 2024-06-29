@@ -1,0 +1,10 @@
+---
+- name: Docker | Include preparation tasks for RedHat based distributions
+  ansible.builtin.include_tasks:
+    file: prepare-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Docker | Include preparation tasks for Debian based distributions
+  ansible.builtin.include_tasks:
+    file: prepare-Debian.yml
+  when: ansible_os_family == 'Debian'

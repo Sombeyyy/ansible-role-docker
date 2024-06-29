@@ -1,0 +1,36 @@
+---
+- name: Debian | Uninstall old (unofficial) versions
+  ansible.builtin.package:
+    name:
+      - docker.io
+      - docker-compose
+      - docker-doc
+      - podman-docker
+      - containerd
+      - runc
+    state: absent
+
+- name: Debian | Prepare for clean install
+  when: docker_clean_install | bool
+  block:
+    - name: Debian | Clean | Uninstall Docker Engine
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+          - docker-ce-rootless-extras
+        state: absent
+        purge: true
+
+    - name: Debian | Clean | Remove Docker directories [1/2]
+      ansible.builtin.file:
+        path: /var/lib/docker
+        state: absent
+
+    - name: Debian | Clean | Remove Docker directories [2/2]
+      ansible.builtin.file:
+        path: /var/lib/containerd
+        state: absent
