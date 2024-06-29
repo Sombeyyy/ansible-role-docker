@@ -1,0 +1,25 @@
+# Ansible files
+.retry
+.cache/
+
+# Python files
+*.py[cod]
+__pycache__/
+
+# Jetbrains IDEs
+*.iml
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
