@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  role_name: docker
+  author: sombeyyy
+  description: Ansible role that installs and configures Docker on Linux systems
+  license: MIT
+  min_ansible_version: '2.10'
+  galaxy_tags:
+    - docker
+    - container
+    - containerization
+dependencies: [ ]
