@@ -37,7 +37,21 @@ None.
 ## Example Playbook
 
 ```yaml
+---
+- hosts: all
 
+  vars:
+    docker_clean_install: true
+    docker_users:
+      - user1
+      - user2
+    docker_daemon_options:
+      storage_driver: "devicemapper"
+      log-opts:
+        max.size: "100m"
+
+  roles:
+    - sombeyyy.docker
 ```
 
 ## License
