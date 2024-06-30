@@ -1,3 +1,7 @@
+> [!WARNING]
+> This role is still a **WIP**. There is no guarantee that this role will achieve the desired result.
+> As soon as a stable version is available, there will be the first release.
+
 # Ansible Role - `sombeyyy.docker`
 
 This is an [Ansible](https://www.ansible.com) role that installs and configures [Docker](https://www.docker.com) on
