@@ -1,0 +1,59 @@
+---
+name: Bug report
+description: Something is not working
+title: "[BUG]: Concise description of the issue"
+labels: ["bug", "unconfirmed"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### ⚠️ Please remember: issues are for *bugs*
+        That is, something you believe affects every single user of this role, not just you.
+  - type: markdown
+    attributes:
+      value: |
+        #### Have a question? 👉 [Start a new discussion](https://github.com/Sombeyyy/ansible-role-docker/search?q=&type=issues)
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is. If applicable, add screenshots to help explain your problem.
+      placeholder: Describe the bug here...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the bahaviour.
+      placeholder: How to reproduce the bug...
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: If applicable, add logs to help explain your problem.
+      placeholder: Add logs here...
+  - type: input
+    id: host-os
+    attributes:
+      label: Host OS
+      description: The Host OS of the machine running the Ansible Role. Please add the architecture (uname -m) if applicable.
+      placeholder: Ubuntu 20.04 (x86_64)
+  - type: input
+    id: target-os
+    attributes:
+      label: Target OS
+      description: The Target OS of the machine running the Ansible Role. Please add the architecture (uname -m) if applicable.
+      placeholder: Ubuntu 20.04 (x86_64)
+  - type: checkboxes
+    id: required-checks
+    attributes:
+      label: Please confirm the following
+      options:
+        - label: I believe this issue is a bug that affects all users of this role, not something specific to my installation.
+          required: true
+        - label: I have already searched for relevant existing issues and discussions before opening this report.
+          required: true
+        - label: I have updated the title field above with a concise description.
+          required: true
