@@ -12,7 +12,7 @@
 - name: Docker | Ensure selected packages are installed
   ansible.builtin.package:
     name: "{{ docker_packages }}"
-    norify: Restart Docker
+    notify: Restart Docker
     state: present
 
 - name: Docker | Ensure /etc/docker/ directory exists
