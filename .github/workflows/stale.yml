@@ -3,6 +3,7 @@ name: Handle inactivity
 on:
   schedule:
     - cron: '55 23 * * 0' # Every Sunday at 23:55
+  workflow_dispatch:
 
 jobs:
   handle-inactivity:
