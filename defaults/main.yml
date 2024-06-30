@@ -8,6 +8,21 @@ docker_packages:
   - docker-buildx-plugin
   - docker-compose-plugin
 
+docker_add_repo: true
+
+docker_repo_url: https://download.docker.com/linux
+
+docker_apt_release_channel: stable
+docker_apt_ansible_distribution: "{{ 'ubuntu' if ansible_distribution in ['Pop!_OS', 'Linux Mint'] else ansible_distribution }}"
+docker_apt_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'armhf' if ansible_architecture == 'armv7l' else 'amd64' }}"
+docker_apt_repository: "deb [arch={{ docker_apt_arch }} signed-by=/etc/apt/keyrings/docker.asc] {{ docker_repo_url }}/{{ docker_apt_ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release channel }}"
+docker_apt_gpg_key: "{{ docker_repo_url }}/{{ docker_apt_ansible_distribution | lower }}/gpg"
+docker_apt_filename: docker
+
+docker_yum_repo_url: "{{ docker_repo_url }}/{{ ansible_distirbution | lower }}/docker-ce.repo"
+docker_yum_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
+docker_yum_gpg_fingerprint: '060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35'
+
 docker_service_manage: true
 docker_service_state: started
 docker_service_enabled: true

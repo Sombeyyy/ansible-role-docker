@@ -39,3 +39,19 @@
       ansible.builtin.file:
         path: /var/lib/containerd
         state: absent
+
+- name: RedHat | Add Docker GPG key
+  ansible.builtin.rpm_key:
+    key: "{{ docker_yum_gpg_key }}"
+    fingerprint: "{{ docker_yum_gpg_fingerprint }}"
+    state: present
+  when: docker_add_repo | bool
+
+- name: RedHat | Add Docker repository
+  ansible.builtin.get_url:
+    url: "{{ docker_yum_repo_url }}"
+    dest: /etc/yum.repos.d/docker-ce.repo
+    mode: 'u=rw,g=r,o=r'
+    owner: root
+    group: root
+  when: docker_add_repo | bool
