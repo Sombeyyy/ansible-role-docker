@@ -1,2 +1,15 @@
 ---
 docker_clean_install: false
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+docker_service_manage: true
+docker_service_state: started
+docker_service_enabled: true
+
+docker_daemon_options: [ ]

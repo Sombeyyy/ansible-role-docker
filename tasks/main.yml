@@ -8,3 +8,35 @@
   ansible.builtin.include_tasks:
     file: prepare-Debian.yml
   when: ansible_os_family == 'Debian'
+
+- name: Docker | Ensure selected packages are installed
+  ansible.builtin.package:
+    name: "{{ docker_packages }}"
+    norify: Restart Docker
+    state: present
+
+- name: Docker | Ensure /etc/docker/ directory exists
+  ansible.builtin.file:
+    path: /etc/docker
+    state: directory
+    mode: 'u=rwx,g=rx,o=rx'
+    owner: root
+    group: root
+  when: docker_daemon_options.keys() | length > 0
+
+- name: Docker | Set Docker Daemon options
+  ansible.builtin.copy:
+    content: "{{ docker_daemon_options | to_nice_json }}"
+    dest: /etc/docker/daemon.json
+    mode: 'u=rw,g=r,o=r'
+    owner: root
+    group: root
+  notify: Restart Docker
+  when: docker_daemon_options.keys() | length > 0
+
+- name: Docker | Set Docker Service settings
+  ansible.builtin.service:
+    name: docker
+    state: "{{ docker_service_state }}"
+    enabled: "{{ docker_service_enabled }}"
+  when: docker_service_manage | bool
